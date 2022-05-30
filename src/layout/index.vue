@@ -22,6 +22,10 @@ export default {
     Sidebar,
     AppMain
   },
+  async mounted() {
+    await this.$store.dispatch('user/profile_action')
+    await this.$store.dispatch('user/avatar_action')
+  },
   mixins: [ResizeMixin],
   computed: {
     sidebar() {

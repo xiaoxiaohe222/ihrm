@@ -1,24 +1,24 @@
 import request from '@/utils/request'
 
-export function login(data) {
-  return request({
-    url: '/vue-admin-template/user/login',
-    method: 'post',
-    data
-  })
-}
+// login getInfo logout
 
-export function getInfo(token) {
-  return request({
-    url: '/vue-admin-template/user/info',
-    method: 'get',
-    params: { token }
-  })
-}
+// 登录的方法
+export const reqLogin = ({ mobile, password }) => request({
+  url: `/sys/login`,
+  method: 'POST',
+  data: {
+    mobile,
+    password
+  }
+})
 
-export function logout() {
-  return request({
-    url: '/vue-admin-template/user/logout',
-    method: 'post'
-  })
-}
+// 获取用户个人信息
+export const reqGetProfile = () => request({
+  url: `/sys/profile`,
+  method: 'POST'
+})
+
+// 通过userId获取用户头像信息
+export const reqGetAvatar = (userId) => request({
+  url: `/sys/user/${userId}`
+})
