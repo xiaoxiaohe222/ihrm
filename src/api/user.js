@@ -22,3 +22,12 @@ export const reqGetProfile = () => request({
 export const reqGetAvatar = (userId) => request({
   url: `/sys/user/${userId}`
 })
+/** *
+ *  获取某个用户的基本信息
+ *
+ * ***/
+export function getUserDetailById(id) {
+  return request({
+    url: `/sys/user/${id}`
+  })
+}

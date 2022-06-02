@@ -22,8 +22,14 @@ instance.interceptors.request.use(config => {
 instance.interceptors.response.use(
   (res) => {
     NProgress.done()
-    // console.log(11, res)
-    return res.data
+    const { success, message } = res.data
+    if (!success) {
+      alert(message)
+      return new Promise(() => {
+      })
+    } else {
+      return res.data
+    }
   },
   (error) => {
     if (error?.response?.status === 401) {

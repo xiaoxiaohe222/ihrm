@@ -34,7 +34,11 @@ Vue.config.productionTip = false
 import '@/directives'
 // 引入自定义插件注册全局组件
 import PageTools from '@/components'
+
 Vue.use(PageTools)
+import { Loading } from 'element-ui'
+
+Vue.prototype.$loading = Loading.service
 new Vue({
   el: '#app',
   router,

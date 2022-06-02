@@ -13,5 +13,13 @@ export default {
       title: '员工',
       icon: 'people'
     }
+  },
+  {
+    path: 'detail/:id?',
+    hidden: true,
+    component: () => import('@/views/employees/Detail'),
+    meta: {
+      title: '员工详情'
+    }
   }]
 }

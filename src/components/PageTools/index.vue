@@ -1,7 +1,7 @@
 <template>
   <el-card class="page-tool">
-    <el-row type="flex" align="middle">
-      <el-col style="display: flex">
+    <el-row type="flex" align="middle" justify="space-between">
+      <el-col style="display: flex;align-items: center">
         <div v-if="showBefore" class="before">
           <i class="el-icon-info" style="color: #579ff8;padding-right: 5px" />
           <slot name="before" />
@@ -33,9 +33,12 @@ export default {
 .page-tool {
   .before {
     border: 1px solid skyblue;
-    padding: 5px;
-    background-color: #e9f6fe;
     font-size: 14px;
+    padding: 0 10px;
+    background-color: #e8f6fe;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 2px;
   }
 
   .after {

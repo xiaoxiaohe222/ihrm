@@ -1,9 +1,7 @@
 <template>
   <div class="dashboard-container">
     <div class="app-container">
-      <h2>
-        approvals
-      </h2>
+      approvals
     </div>
   </div>
 </template>
