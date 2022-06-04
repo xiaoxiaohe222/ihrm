@@ -14,8 +14,8 @@
       </PageTools>
       <!--     staffPhoto 表格区域-->
       <el-table v-loading="loading" :data="list" bousernamerder style="width: 100%">
-        <el-table-column align="center" width="80" type="index" label="序号"/>
-        <el-table-column prop="username" align="center" label="姓名" sortable/>
+        <el-table-column align="center" width="80" type="index" label="序号" />
+        <el-table-column prop="username" align="center" label="姓名" sortable />
         <el-table-column align="center" label="头像">
           <template slot-scope="{row}">
             <img
@@ -27,11 +27,11 @@
             >
           </template>
         </el-table-column>
-        <el-table-column prop="mobile" align="center" label="手机号" sortable/>
-        <el-table-column prop="workNumber" align="center" label="工号" sortable/>
-        <el-table-column prop="formOfEmployment" :formatter="formOfEmployment" align="center" label="聘用形式" sortable/>
-        <el-table-column prop="departmentName" align="center" label="部门" sortable/>
-        <el-table-column prop="timeOfEntry" align="center" label="入职时间" sortable/>
+        <el-table-column prop="mobile" align="center" label="手机号" sortable />
+        <el-table-column prop="workNumber" align="center" label="工号" sortable />
+        <el-table-column prop="formOfEmployment" :formatter="formOfEmployment" align="center" label="聘用形式" sortable />
+        <el-table-column prop="departmentName" align="center" label="部门" sortable />
+        <el-table-column prop="timeOfEntry" align="center" label="入职时间" sortable />
         <el-table-column prop="" align="center" label="状态" sortable>
           <template>
             <el-switch
@@ -64,7 +64,7 @@
         />
       </el-row>
       <!--    新增员工的弹出框-->
-      <AddEmployee ref="addDialogRef" :show-add-dialog.sync="showAddDialog"/>
+      <AddEmployee ref="addDialogRef" :show-add-dialog.sync="showAddDialog" />
       <!--      二维码弹出框-->
       <el-dialog
         title="二维码"

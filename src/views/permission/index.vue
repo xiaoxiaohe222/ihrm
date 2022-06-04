@@ -15,9 +15,9 @@
           row-key="id"
           :tree-props="{children: 'children'}"
         >
-          <el-table-column label="名称" prop="name"/>
-          <el-table-column align="center" prop="code" label="标识"/>
-          <el-table-column align="center" prop="description" label="描述"/>
+          <el-table-column label="名称" prop="name" />
+          <el-table-column align="center" prop="code" label="标识" />
+          <el-table-column align="center" prop="description" label="描述" />
           <el-table-column align="center" label="操作">
             <template v-slot="{row}">
               <el-button v-if="row.type === 1" type="text" @click="addPermission(2,row.id)">添加</el-button>
@@ -38,13 +38,13 @@
       <!-- 表单 -->
       <el-form ref="perForm" :model="formData" :rules="rules" label-width="120px">
         <el-form-item label="权限名称" prop="name">
-          <el-input v-model="formData.name" style="width:90%"/>
+          <el-input v-model="formData.name" style="width:90%" />
         </el-form-item>
         <el-form-item label="权限标识" prop="code">
-          <el-input v-model="formData.code" style="width:90%"/>
+          <el-input v-model="formData.code" style="width:90%" />
         </el-form-item>
         <el-form-item label="权限描述">
-          <el-input v-model="formData.description" style="width:90%"/>
+          <el-input v-model="formData.description" style="width:90%" />
         </el-form-item>
         <el-form-item label="开启">
           <el-switch

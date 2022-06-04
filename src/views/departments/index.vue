@@ -3,7 +3,7 @@
     <div class="app-container">
       <el-card class="tree-card">
         <!--        第一行的数据-->
-        <TreeItem :tree-node="company" :is-root="true" @addDept="addDept" @editDept="editDept"/>
+        <TreeItem :tree-node="company" :is-root="true" @addDept="addDept" @editDept="editDept" />
         <!--        树形结构区域@node-click="handleNodeClick"-->
         <el-tree :data="departs" default-expand-all :props="defaultProps">
           <!--          插槽-->
@@ -44,7 +44,7 @@ export default {
       departs: [],
       company: { name: '', manager: '负责人', id: '' },
       showDialog: false, // 是否显示弹出框
-      nodeData: {}, // 点击添加的当前节点数据
+      nodeData: {} // 点击添加的当前节点数据
     }
   },
   created() {
@@ -78,7 +78,6 @@ export default {
   padding: 30px 140px;
   font-size: 14px;
 }
-
 
 </style>
 

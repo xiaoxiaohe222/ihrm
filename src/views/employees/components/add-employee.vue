@@ -7,10 +7,10 @@
   >
     <el-form ref="addForm" :model="addForm" :rules="rules" label-width="120px">
       <el-form-item label="姓名" prop="username">
-        <el-input v-model="addForm.username" style="width:50%" placeholder="请输入姓名"/>
+        <el-input v-model="addForm.username" style="width:50%" placeholder="请输入姓名" />
       </el-form-item>
       <el-form-item label="手机号" prop="mobile">
-        <el-input v-model="addForm.mobile" style="width:50%" placeholder="请输入手机号"/>
+        <el-input v-model="addForm.mobile" style="width:50%" placeholder="请输入手机号" />
       </el-form-item>
       <el-form-item label="入职时间" prop="timeOfEntry">
         <el-date-picker
@@ -33,7 +33,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="工号" prop="workNumber">
-        <el-input v-model="addForm.workNumber" style="width:50%" placeholder="请输入工号"/>
+        <el-input v-model="addForm.workNumber" style="width:50%" placeholder="请输入工号" />
       </el-form-item>
       <!--      选择部门-->
       <el-form-item label="部门" prop="departmentName">
@@ -55,7 +55,7 @@
         </div>
       </el-form-item>
       <el-form-item label="转正时间">
-        <el-date-picker v-model="addForm.correctionTime" style="width:40%" placeholder="请选择转正时间"/>
+        <el-date-picker v-model="addForm.correctionTime" style="width:40%" placeholder="请选择转正时间" />
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">

@@ -9,10 +9,10 @@
     <!--    表单部分-->
     <el-form ref="deptForm" :model="deptForm" :rules="deptRules" label-width="120px">
       <el-form-item label="部门名称" prop="name">
-        <el-input v-model="deptForm.name" style="width: 80%" placeholder="1-50个字符"/>
+        <el-input v-model="deptForm.name" style="width: 80%" placeholder="1-50个字符" />
       </el-form-item>
       <el-form-item label="部门编码" prop="code">
-        <el-input v-model="deptForm.code" style="width: 80%" placeholder="1-50个字符"/>
+        <el-input v-model="deptForm.code" style="width: 80%" placeholder="1-50个字符" />
       </el-form-item>
       <el-form-item label="部门负责人" prop="manager">
         <el-select v-model="deptForm.manager" style="width: 30%" placeholder="请选择" @focus="getEmployees">
@@ -25,7 +25,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="部门介绍" prop="introduce">
-        <el-input v-model="deptForm.introduce" style="width: 80%" type="textarea" :row="3" placeholder="1-300个字符"/>
+        <el-input v-model="deptForm.introduce" style="width: 80%" type="textarea" :row="3" placeholder="1-300个字符" />
       </el-form-item>
     </el-form>
     <!--    底部的插槽部分-->

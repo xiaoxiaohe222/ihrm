@@ -37,11 +37,13 @@ import PageTools from '@/components'
 
 Vue.use(PageTools)
 import { Loading } from 'element-ui'
+import i18n from './i18n'
 
 Vue.prototype.$loading = Loading.service
 new Vue({
   el: '#app',
   router,
   store,
+  i18n,
   render: h => h(App)
 })

@@ -9,9 +9,9 @@
             </el-button>
             <!--          表格-->
             <el-table border :data="settingList" style="width: 100%">
-              <el-table-column type="index" width="80" label="序号" align="center"/>
-              <el-table-column prop="name" label="角色" width="250" align="center"/>
-              <el-table-column prop="description" label="描述" align="center"/>
+              <el-table-column type="index" width="80" label="序号" align="center" />
+              <el-table-column prop="name" label="角色" width="250" align="center" />
+              <el-table-column prop="description" label="描述" align="center" />
               <el-table-column prop="address" label="操作" align="center">
                 <template slot-scope="{row}">
                   <el-button size="small" type="success" @click="assignPerm(row.id)">分配权限</el-button>
@@ -42,16 +42,16 @@
             <!--            表单-->
             <el-form label-width="80px" :model="companyInfo">
               <el-form-item label="公司名称">
-                <el-input v-model="companyInfo.name" disabled style="width: 400px"/>
+                <el-input v-model="companyInfo.name" disabled style="width: 400px" />
               </el-form-item>
               <el-form-item label="公司地址">
-                <el-input v-model="companyInfo.companyAddress" disabled style="width: 400px"/>
+                <el-input v-model="companyInfo.companyAddress" disabled style="width: 400px" />
               </el-form-item>
               <el-form-item label="公司邮箱">
-                <el-input v-model="companyInfo.mailbox" disabled style="width: 400px"/>
+                <el-input v-model="companyInfo.mailbox" disabled style="width: 400px" />
               </el-form-item>
               <el-form-item label="备注">
-                <el-input v-model="companyInfo.remarks" disabled style="width: 400px" type="textarea" :row="3"/>
+                <el-input v-model="companyInfo.remarks" disabled style="width: 400px" type="textarea" :row="3" />
               </el-form-item>
             </el-form>
           </el-tab-pane>
@@ -67,10 +67,10 @@
       >
         <el-form ref="roleDialogRef" :model="currentRoleObj" :rules="rules" label-width="80px">
           <el-form-item label="角色名称" prop="name">
-            <el-input v-model="currentRoleObj.name"/>
+            <el-input v-model="currentRoleObj.name" />
           </el-form-item>
           <el-form-item label="角色描述">
-            <el-input v-model="currentRoleObj.description"/>
+            <el-input v-model="currentRoleObj.description" />
           </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
@@ -148,7 +148,7 @@ export default {
       this.selectedKeys = []
     },
     async assignPerm(id) {
-      this.selectedKeys= []
+      this.selectedKeys = []
       this.showPermDialog = true
       this.roleId = id
       const res = await getPermissionList()

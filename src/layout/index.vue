@@ -22,10 +22,6 @@ export default {
     Sidebar,
     AppMain
   },
-  async mounted() {
-    await this.$store.dispatch('user/profile_action')
-    await this.$store.dispatch('user/avatar_action')
-  },
   mixins: [ResizeMixin],
   computed: {
     sidebar() {
@@ -45,6 +41,10 @@ export default {
         mobile: this.device === 'mobile'
       }
     }
+  },
+  async mounted() {
+    await this.$store.dispatch('user/profile_action')
+    await this.$store.dispatch('user/avatar_action')
   },
   methods: {
     handleClickOutside() {

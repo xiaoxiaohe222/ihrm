@@ -1,6 +1,6 @@
 <template>
   <div style="padding: 40px">
-    <UploadExcel :on-success="success"/>
+    <UploadExcel :on-success="success" />
   </div>
 </template>
 <script>

@@ -1,8 +1,8 @@
 <template>
   <div class="navbar">
-    <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar"/>
+    <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
 
-    <breadcrumb class="breadcrumb-container"/>
+    <breadcrumb class="breadcrumb-container" />
 
     <div class="right-menu">
       <el-dropdown class="avatar-container" trigger="click">
@@ -14,7 +14,7 @@
             class="user-avatar"
           >
           <span style="color: #409EFF;padding: 0 10px;">{{ userInfo.username }}</span>
-          <i class="el-icon-caret-bottom"/>
+          <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
           <router-link to="/">

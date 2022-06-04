@@ -10,9 +10,9 @@
       :on-preview="handlePictureCardPreview"
       :on-remove="handleRemove"
     >
-      <i class="el-icon-plus"/>
+      <i class="el-icon-plus" />
     </el-upload>
-    <el-progress v-show="showProgress" style="width: 180px" :percentage="percentage"/>
+    <el-progress v-show="showProgress" style="width: 180px" :percentage="percentage" />
     <el-dialog :visible.sync="dialogVisible" title="图片预览">
       <img width="100%" :src="imageUrl" alt="">
     </el-dialog>
