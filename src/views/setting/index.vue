@@ -14,9 +14,9 @@
               <el-table-column prop="description" label="描述" align="center"/>
               <el-table-column prop="address" label="操作" align="center">
                 <template slot-scope="{row}">
-                  <el-button size="small" type="success">分配权限</el-button>
-                  <el-button size="small" @click="editRole(row)" type="primary">编辑</el-button>
-                  <el-button @click="delRole(row.id)" size="small" type="danger">删除</el-button>
+                  <el-button size="small" type="success" @click="assignPerm(row.id)">分配权限</el-button>
+                  <el-button size="small" type="primary" @click="editRole(row)">编辑</el-button>
+                  <el-button size="small" type="danger" @click="delRole(row.id)">删除</el-button>
                 </template>
               </el-table-column>
             </el-table>
@@ -28,8 +28,7 @@
                 :current-page.sync="page.page"
                 :page-size="page.pagesize"
                 @current-change="page=>{getRoleList(page)}"
-              >
-              </el-pagination>
+              />
             </el-row>
           </el-tab-pane>
           <el-tab-pane label="配置管理" name="configuration">
@@ -79,13 +78,39 @@
           <el-button type="primary" @click="confirmBtn">确 定</el-button>
         </span>
       </el-dialog>
+      <!--      新增权限弹出框:before-close="handleClose"-->
+      <el-dialog
+        title="分配权限"
+        :visible.sync="showPermDialog"
+        center
+        :before-close="handlePermClose"
+      >
+        <el-tree
+          ref="tree"
+          :data="treeData"
+          :props="defaultProps"
+          show-checkbox
+          default-expand-all
+          :check-strictly="true"
+          node-key="id"
+          icon-class="el-icon-share"
+          highlight-current
+          :default-checked-keys="selectedKeys"
+        />
+        <span slot="footer" class="dialog-footer">
+          <el-button size="small" type="primary" @click="btnPermOk">确 定</el-button>
+          <el-button size="small" @click="btnPermCancel">取 消</el-button>
+        </span>
+      </el-dialog>
     </div>
   </div>
 </template>
 
 <script>
-import { getRoleList, getCompanyInfo, reqDelRole, reqUpdateRole, addRole } from '@/api/setting'
+import { getRoleList, getCompanyInfo, reqDelRole, reqUpdateRole, addRole, getDetail, assignPerm } from '@/api/setting'
 import { mapState } from 'vuex'
+import { tranListToTreeData } from '@/utils'
+import { getPermissionList } from '@/api/permisson'
 
 export default {
   name: 'Setting',
@@ -103,7 +128,12 @@ export default {
       currentRoleObj: {},
       rules: {
         name: [{ required: true, message: '角色名称不能为空', trigger: 'blur' }]
-      }
+      },
+      showPermDialog: false,
+      defaultProps: { label: 'name' },
+      treeData: [],
+      selectedKeys: [],
+      roleId: ''
     }
   },
   computed: {
@@ -114,6 +144,27 @@ export default {
     this.getCompanyDetail(this.userInfo.companyId)
   },
   methods: {
+    handlePermClose() {
+      this.selectedKeys = []
+    },
+    async assignPerm(id) {
+      this.selectedKeys= []
+      this.showPermDialog = true
+      this.roleId = id
+      const res = await getPermissionList()
+      this.treeData = tranListToTreeData(res.data, '0')
+      // 获取当前用户的已有权限数据
+      const { data: { permIds }} = await getDetail(id)
+      this.selectedKeys = permIds
+    },
+    btnPermCancel() {
+      this.showPermDialog = false
+    },
+    async btnPermOk() {
+      await assignPerm({ id: this.roleId, permIds: this.$refs.tree.getCheckedKeys() })
+      this.$message.success('分配权限成功')
+      this.showPermDialog = false
+    },
     handleClick(tab) { // 切换tab的点击事件
       this.activeName = tab.name
     },

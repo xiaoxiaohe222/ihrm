@@ -23,6 +23,7 @@
               style="width: 60px;height: 60px"
               :src="row.staffPhoto"
               alt="avatar"
+              @click="imgClick(row.staffPhoto)"
             >
           </template>
         </el-table-column>
@@ -46,7 +47,7 @@
             <el-button type="text" size="small">转正</el-button>
             <el-button type="text" size="small">调岗</el-button>
             <el-button type="text" size="small">离职</el-button>
-            <el-button type="text" size="small">角色</el-button>
+            <el-button type="text" size="small" @click="assignRole(row.id)">角色</el-button>
             <el-button type="text" size="small" @click="delById(row.id)">删除</el-button>
           </template>
         </el-table-column>
@@ -64,6 +65,17 @@
       </el-row>
       <!--    新增员工的弹出框-->
       <AddEmployee ref="addDialogRef" :show-add-dialog.sync="showAddDialog"/>
+      <!--      二维码弹出框-->
+      <el-dialog
+        title="二维码"
+        :visible.sync="showQrcode"
+        width="30%"
+        :before-close="()=>{showQrcode=false}"
+      >
+        <img :src="staffPhoto" alt="" style="width: 200px;height: 200px;">
+      </el-dialog>
+      <!--      分配角色的弹出框-->
+      <AssignRole ref="roleRef" :show-role-dialog.sync="showRoleDialog" :user-id="userId" />
     </div>
   </div>
 </template>
@@ -72,12 +84,16 @@
 import { reqEmployeesList, delEmployee } from '@/api/employees'
 import employeesCons from '@/api/constant/employees'
 import AddEmployee from '@/views/employees/components/add-employee'
+import AssignRole from '@/views/employees/components/assign-role'
 
 export default {
   name: 'Employees',
-  components: { AddEmployee },
+  components: { AssignRole, AddEmployee },
   data() {
     return {
+      showRoleDialog: false,
+      staffPhoto: '',
+      showQrcode: false,
       showAddDialog: false,
       pageObj: {
         page: 1,
@@ -85,13 +101,30 @@ export default {
       },
       total: 0,
       list: [],
-      loading: false
+      loading: false,
+      userId: ''
     }
   },
   created() {
     this.getList()
   },
   methods: {
+    async assignRole(id) {
+      this.userId = id
+      await this.$refs.roleRef.getUserDetailById(id)
+      this.showRoleDialog = true
+    },
+    imgClick(data) {
+      this.showQrcode = true
+      this.staffPhoto = data
+      /* QRCode.toDataURL('I am a pony!')
+        .then(url => {
+          this.staffPhoto = url
+        })
+        .catch(err => {
+          console.error(err)
+        })*/
+    },
     parseTime(time, cFormat) {
       if (arguments.length === 0 || !time) {
         return null

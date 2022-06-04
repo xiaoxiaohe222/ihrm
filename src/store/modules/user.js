@@ -3,13 +3,19 @@ import {
   reqGetProfile,
   reqGetAvatar
 } from '@/api/user'
+import { constantRoutes, asyncRoutes, resetRouter } from '@/router'
+import router from '@/router'
 
 const state = {
   token: localStorage.getItem('token') || '',
   userInfo: {},
-  avatar: ''
+  avatar: '',
+  routes: []
 }
 const mutations = {
+  SET_ROUTES(state, asyncRoutes) {
+    state.routes = [...constantRoutes, ...asyncRoutes]
+  },
   SAVE_TOKEN(state, token) {
     state.token = token
   },
@@ -19,11 +25,14 @@ const mutations = {
   SAVE_AVATAR(state, data) {
     state.avatar = data
   },
-  LOG_OUT() {
+  LOG_OUT(state) {
     state.token = ''
     state.userInfo = {}
     state.avatar = ''
     localStorage.removeItem('token')
+    // 重置路由表
+    state.routes = constantRoutes
+    resetRouter()
   }
 }
 const actions = {
@@ -41,6 +50,17 @@ const actions = {
     const res = await reqGetProfile()
     if (res.code === 10000) {
       commit('SAVE_PROFILE', res.data)
+      // 进行动态权限的处理
+      const arr = []
+      res.data.roles.menus.forEach((key) => {
+        const re = asyncRoutes.find((item) => item.name === key)
+        if (re) {
+          arr.push(re)
+        }
+      })
+      router.addRoutes([...arr, { path: '*', redirect: '/404', hidden: true }])
+      commit('SET_ROUTES', arr)
+      delRoutes()
       return 'ok'
     } else {
       return Promise.reject(new Error('获取用户个人信息失败'))
@@ -56,6 +76,19 @@ const actions = {
     }
   }
 }
+
+export function delRoutes() {
+  const roles = state.userInfo.roles
+  const arr = []
+  roles.menus.forEach((key) => {
+    const re = asyncRoutes.find((item) => item.name === key)
+    if (re) {
+      arr.push(re)
+    }
+  })
+  router.addRoutes(arr)
+}
+
 const getters = {}
 
 export default {

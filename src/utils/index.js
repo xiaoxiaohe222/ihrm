@@ -125,7 +125,7 @@ export function param2Obj(url) {
  * @returns {*[]}
  */
 export function tranListToTreeData(list, rootValue) {
-  var arr = []
+  const arr = []
   list.forEach(item => {
     if (item.pid === rootValue) {
       // 找到之后 就要去找 item 下面有没有子节点
